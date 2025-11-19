@@ -25,13 +25,20 @@ export default apiInitializer("1.8.0", (api) => {
     const isDiscoveryRoute = targetRoute?.startsWith("discovery.");
     
     if (isDiscoveryRoute) {
-      // Check if user is a member of any groups (excluding automatic groups)
-      // Automatic groups have IDs 0-15, user groups start at 20+
+      // Get user's groups and filter out automatic groups
       const userGroups = user.groups || [];
-      const hasJoinedGroups = userGroups.some(group => group.id >= 20);
       
-      if (hasJoinedGroups) {
-        console.log("✓ User is already in groups, allowing normal navigation");
+      // Automatic groups in Discourse have these properties:
+      // - automatic: true (this is the key property to check)
+      const userCreatedGroups = userGroups.filter(group => !group.automatic);
+      
+      console.log(`📊 User has ${userCreatedGroups.length} non-automatic groups:`, userCreatedGroups.map(g => g.name));
+      
+      const minRequired = settings.min_groups_required || 1;
+      const hasEnoughGroups = userCreatedGroups.length >= minRequired;
+      
+      if (hasEnoughGroups) {
+        console.log(`✓ User has ${userCreatedGroups.length} groups (required: ${minRequired}), allowing normal navigation`);
         return;
       }
       
@@ -43,7 +50,7 @@ export default apiInitializer("1.8.0", (api) => {
       }
       
       const redirectUrl = settings.redirect_url || "/g";
-      console.log(`🔄 User not in any groups yet, redirecting to ${redirectUrl}`);
+      console.log(`🔄 User has only ${userCreatedGroups.length} groups (need ${minRequired}), redirecting to ${redirectUrl}`);
       
       // Mark as redirected this session
       sessionStorage.setItem("redirected_to_groups", "true");

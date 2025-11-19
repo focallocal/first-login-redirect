@@ -3,6 +3,13 @@ enable_redirect:
   type: bool
   description: "Redirect users without groups to a specified page on login"
 
+min_groups_required:
+  default: 1
+  type: integer
+  min: 0
+  max: 10
+  description: "Minimum number of user-created groups required before stopping redirect (automatic groups don't count)"
+
 redirect_url:
   default: "/g"
   type: string

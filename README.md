@@ -51,6 +51,8 @@ All customization can be done from the Discourse admin panel without editing cod
 
 **Redirect Settings:**
 - **Enable Redirect**: Turn redirect feature on/off (default: true)
+- **Min Groups Required**: How many user-created groups they must join before redirect stops (default: 1)
+  - Automatic groups (like trust_level_0, everyone) don't count
 - **Redirect URL**: Where to send users without groups (default: `/g`)
   - Examples: `/g` (groups), `/categories`, `/about`, `/latest`
 
