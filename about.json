@@ -1,0 +1,12 @@
+{
+  "name": "First Login Redirect to Groups",
+  "component": true,
+  "authors": [
+    "Andy@Focallocal"
+  ],
+  "meta_url": "https://publichappinessmovement.com",
+  "about_url": "https://github.com/focallocal/first-login-redirect",
+  "license_url": "https://opensource.org/licenses/MIT",
+  "theme_version": "1.0.0",
+  "minimum_discourse_version": "2.8.0"
+}
