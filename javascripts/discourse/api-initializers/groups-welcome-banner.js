@@ -6,13 +6,17 @@ export default apiInitializer("1.8.0", (api) => {
   
   // Try multiple possible outlets for the groups page
   const outlets = [
-    "before-groups-index",
-    "above-main-container", 
-    "before-list-area"
+    "above-main-container",
+    "discovery-list-container-top",
+    "before-list-area",
+    "groups-header",
+    "before-group-members"
   ];
   
   outlets.forEach(outlet => {
     console.log("🔌 Attempting to render banner in outlet:", outlet);
     api.renderInOutlet(outlet, GroupsWelcomeBanner);
   });
+  
+  console.log("✅ Banner registered for", outlets.length, "outlets");
 });
