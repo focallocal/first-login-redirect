@@ -1,12 +1,15 @@
-# First Login Redirect to Groups
+# First Login Redirect
 
-A Discourse theme component that redirects new users (Trust Level 0) to the groups page after their first login/signup and displays a welcome banner explaining what to do.
+A Discourse theme component that redirects users without group memberships to a custom page and displays a customizable welcome banner.
 
 ## Features
 
-- 🔄 **Auto-redirect** - Redirects Trust Level 0 users to `/g` (groups page) after signup
-- 📢 **Welcome banner** - Shows a friendly message at the top of the groups page
-- 👤 **Trust Level aware** - Only affects new users (TL0), veterans see normal behavior
+- 🔄 **Smart Redirect** - Redirects users without group memberships to a custom page on login
+- 🎨 **Customizable Banner** - Colorful welcome banner on groups page
+- ⚙️ **Fully Configurable** - Enable/disable redirect and banner independently
+- 👤 **Group-based logic** - Stops redirecting once user joins any group
+- 🎯 **Trust Level aware** - Banner visibility can be restricted by trust level
+- 🌈 **Rainbow Gradient** - Eye-catching 6-color gradient background (with toggle for solid color)
 - 📱 **Mobile responsive** - Banner adapts to mobile screens
 
 ## Installation
@@ -21,14 +24,16 @@ A Discourse theme component that redirects new users (Trust Level 0) to the grou
 ## How It Works
 
 ### Redirect Logic
-- Checks if user is Trust Level 0 (new user)
-- Detects when they complete signup/login
-- Redirects them once to `/g` (groups page)
-- Uses sessionStorage to prevent redirect loops
+- Checks if user is a member of any groups
+- Detects when they navigate to the homepage
+- Redirects them to configured URL (default: `/g`)
+- Stops redirecting once they join any group
+- Can be disabled independently of banner
 
 ### Welcome Banner
-- Only shown on the groups index page (`/g`)
-- Only visible to Trust Level 0 users
+- Shows on groups index page (`/g`) by default
+- Visibility controlled by trust level settings
+- Can be disabled independently of redirect
 - Automatically hidden once user reaches Trust Level 1
 - Positioned at top of groups list using `before-groups-index` outlet
 
@@ -44,8 +49,13 @@ All customization can be done from the Discourse admin panel without editing cod
 
 **Available Settings:**
 
-**Content:**
-- **Show Banner**: Toggle the banner on/off
+**Redirect Settings:**
+- **Enable Redirect**: Turn redirect feature on/off (default: true)
+- **Redirect URL**: Where to send users without groups (default: `/g`)
+  - Examples: `/g` (groups), `/categories`, `/about`, `/latest`
+
+**Banner Settings:**
+- **Show Banner**: Toggle the banner on/off (default: true)
 - **Min Trust Level**: Minimum trust level to see banner (0-4, default: 0)
 - **Max Trust Level**: Maximum trust level to see banner (0-4, default: 4)
 - **Banner Heading**: Main large text

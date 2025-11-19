@@ -7,6 +7,11 @@ export default apiInitializer("1.8.0", (api) => {
   
   // Intercept route transitions
   router.on("routeWillChange", (transition) => {
+    // Check if redirect is enabled
+    if (!settings.enable_redirect) {
+      return;
+    }
+    
     const user = api.getCurrentUser();
     
     if (!user) {
@@ -33,11 +38,12 @@ export default apiInitializer("1.8.0", (api) => {
       // Check if we've already redirected this session
       const hasRedirectedThisSession = sessionStorage.getItem("redirected_to_groups");
       if (hasRedirectedThisSession) {
-        console.log("✓ Already redirected to groups this session");
+        console.log("✓ Already redirected this session");
         return;
       }
       
-      console.log("🔄 User not in any groups yet, redirecting to /g");
+      const redirectUrl = settings.redirect_url || "/g";
+      console.log(`🔄 User not in any groups yet, redirecting to ${redirectUrl}`);
       
       // Mark as redirected this session
       sessionStorage.setItem("redirected_to_groups", "true");
@@ -45,8 +51,8 @@ export default apiInitializer("1.8.0", (api) => {
       // Abort the current transition
       transition.abort();
       
-      // Redirect to groups page
-      router.transitionTo("groups.index");
+      // Redirect to configured URL
+      window.location.href = redirectUrl;
     }
   });
   

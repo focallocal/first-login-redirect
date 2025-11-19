@@ -1,3 +1,13 @@
+enable_redirect:
+  default: true
+  type: bool
+  description: "Redirect users without groups to a specified page on login"
+
+redirect_url:
+  default: "/g"
+  type: string
+  description: "URL to redirect users to (e.g., /g, /categories, /about)"
+
 show_banner:
   default: true
   type: bool

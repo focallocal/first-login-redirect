@@ -6,6 +6,11 @@ export default class GroupsWelcomeBanner extends Component {
   @service currentUser;
 
   get shouldShow() {
+    // Check if banner is enabled in settings
+    if (!settings.show_banner) {
+      return false;
+    }
+    
     if (!this.currentUser || this.router.currentRouteName !== "groups.index") {
       return false;
     }
