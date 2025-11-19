@@ -7,16 +7,9 @@ export default apiInitializer("1.8.0", (api) => {
   
   // Intercept route transitions
   router.on("routeWillChange", (transition) => {
-    const currentUser = api.getCurrentUser();
+    const user = api.getCurrentUser();
     
-    if (!currentUser || currentUser.trust_level !== 0) {
-      return; // Only process for TL0 users
-    }
-    
-    // Check if we've already redirected this session
-    const hasRedirected = sessionStorage.getItem("first_login_redirected");
-    if (hasRedirected) {
-      console.log("✓ Already redirected this session");
+    if (!user) {
       return;
     }
     
@@ -27,10 +20,27 @@ export default apiInitializer("1.8.0", (api) => {
     const isDiscoveryRoute = targetRoute?.startsWith("discovery.");
     
     if (isDiscoveryRoute) {
-      console.log("🔄 Intercepting discovery route, redirecting TL0 user to /g");
+      // Check if user is a member of any groups (excluding automatic groups)
+      // Automatic groups have IDs 0-15, user groups start at 20+
+      const userGroups = user.groups || [];
+      const hasJoinedGroups = userGroups.some(group => group.id >= 20);
       
-      // Mark as redirected
-      sessionStorage.setItem("first_login_redirected", "true");
+      if (hasJoinedGroups) {
+        console.log("✓ User is already in groups, allowing normal navigation");
+        return;
+      }
+      
+      // Check if we've already redirected this session
+      const hasRedirectedThisSession = sessionStorage.getItem("redirected_to_groups");
+      if (hasRedirectedThisSession) {
+        console.log("✓ Already redirected to groups this session");
+        return;
+      }
+      
+      console.log("🔄 User not in any groups yet, redirecting to /g");
+      
+      // Mark as redirected this session
+      sessionStorage.setItem("redirected_to_groups", "true");
       
       // Abort the current transition
       transition.abort();
