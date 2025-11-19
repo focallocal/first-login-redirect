@@ -1,47 +1,44 @@
 import { apiInitializer } from "discourse/lib/api";
 
 export default apiInitializer("1.8.0", (api) => {
-  api.onPageChange((url, title) => {
+  const router = api.container.lookup("service:router");
+  
+  console.log("🚀 First-login-redirect: Initializing route interceptor");
+  
+  // Intercept route transitions
+  router.on("routeWillChange", (transition) => {
     const currentUser = api.getCurrentUser();
     
-    console.log("🔍 First-Login-Redirect: Page changed to:", url);
-    console.log("👤 Current user:", currentUser?.username, "TL:", currentUser?.trust_level);
+    if (!currentUser || currentUser.trust_level !== 0) {
+      return; // Only process for TL0 users
+    }
     
-    if (!currentUser) {
-      console.log("⚠️ No user logged in, skipping redirect");
-      return;
-    }
-
-    // Only redirect Trust Level 0 users
-    if (currentUser.trust_level !== 0) {
-      console.log("✓ User is TL" + currentUser.trust_level + ", skipping redirect");
-      return;
-    }
-
     // Check if we've already redirected this session
     const hasRedirected = sessionStorage.getItem("first_login_redirected");
     if (hasRedirected) {
-      console.log("✓ Already redirected this session, clearing flag to test");
-      // For testing: Clear after first redirect so you can see it again
-      // Comment this out in production
-      sessionStorage.removeItem("first_login_redirected");
+      console.log("✓ Already redirected this session");
       return;
     }
-
-    // Redirect on homepage variants (/, /top, /latest, /categories, etc.) but not /g
-    const isHomepage = url === "/" || 
-                       url.startsWith("/top") || 
-                       url.startsWith("/latest") || 
-                       url.startsWith("/categories");
     
-    if (isHomepage) {
-      console.log("🔄 Redirecting TL0 user from homepage to /g");
+    const targetRoute = transition.to?.name;
+    console.log("🔍 Route transition detected:", targetRoute);
+    
+    // Intercept redirects to discovery routes (homepage variants)
+    const isDiscoveryRoute = targetRoute?.startsWith("discovery.");
+    
+    if (isDiscoveryRoute) {
+      console.log("🔄 Intercepting discovery route, redirecting TL0 user to /g");
+      
+      // Mark as redirected
       sessionStorage.setItem("first_login_redirected", "true");
-      window.location.href = "/g";
-    } else if (url.startsWith("/g")) {
-      console.log("✓ Already on groups page");
-    } else {
-      console.log("ℹ️ Not on homepage, not redirecting");
+      
+      // Abort the current transition
+      transition.abort();
+      
+      // Redirect to groups page
+      router.transitionTo("groups.index");
     }
   });
+  
+  console.log("✅ First-login-redirect: Route interceptor installed");
 });
