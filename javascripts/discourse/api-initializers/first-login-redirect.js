@@ -21,17 +21,27 @@ export default apiInitializer("1.8.0", (api) => {
     // Check if we've already redirected this session
     const hasRedirected = sessionStorage.getItem("first_login_redirected");
     if (hasRedirected) {
-      console.log("✓ Already redirected this session");
+      console.log("✓ Already redirected this session, clearing flag to test");
+      // For testing: Clear after first redirect so you can see it again
+      // Comment this out in production
+      sessionStorage.removeItem("first_login_redirected");
       return;
     }
 
-    // Redirect on first page after login (any page except /g)
-    if (!url.startsWith("/g")) {
-      console.log("🔄 Redirecting TL0 user to /g");
+    // Redirect on homepage variants (/, /top, /latest, /categories, etc.) but not /g
+    const isHomepage = url === "/" || 
+                       url.startsWith("/top") || 
+                       url.startsWith("/latest") || 
+                       url.startsWith("/categories");
+    
+    if (isHomepage) {
+      console.log("🔄 Redirecting TL0 user from homepage to /g");
       sessionStorage.setItem("first_login_redirected", "true");
       window.location.href = "/g";
-    } else {
+    } else if (url.startsWith("/g")) {
       console.log("✓ Already on groups page");
+    } else {
+      console.log("ℹ️ Not on homepage, not redirecting");
     }
   });
 });
