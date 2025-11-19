@@ -4,12 +4,10 @@ import { service } from "@ember/service";
 export default class GroupsWelcomeBanner extends Component {
   @service router;
   @service currentUser;
-  @service siteSettings;
 
   get shouldShow() {
     // Only show on /g (groups index page) for trust level 0 users
     return (
-      settings.show_banner &&
       this.currentUser &&
       this.currentUser.trust_level === 0 &&
       this.router.currentRouteName === "groups.index"

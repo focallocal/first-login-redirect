@@ -34,27 +34,49 @@ A Discourse theme component that redirects new users (Trust Level 0) to the grou
 
 ## Customization
 
-### Theme Settings (Recommended)
+### Theme Settings (Admin Panel)
+
+All customization can be done from the Discourse admin panel without editing code!
 
 1. Go to **Admin → Customize → Themes**
 2. Click on your theme that includes this component
 3. Go to **Settings** and find the "First Login Redirect" section
-4. Customize:
-   - **Banner Heading**: The main large text (default: "Welcome to Public Happiness Movement!")
-   - **Banner Subheading**: The smaller explanatory text below the heading
-   - **Show Banner**: Toggle the banner on/off
 
-### Advanced: Change Banner Colors
+**Available Settings:**
 
-The banner uses a vibrant rainbow gradient inspired by the Public Happiness Movement logo.
+**Content:**
+- **Show Banner**: Toggle the banner on/off
+- **Banner Heading**: Main large text
+- **Banner Subheading**: Smaller explanatory text
 
-To customize colors, edit `common/common.scss`:
+**Typography:**
+- **Heading Font Size**: Size of main heading (default: 2.5em)
+- **Subheading Font Size**: Size of subheading (default: 1.25em)
+- **Text Shadow Enabled**: Toggle text shadow for readability
+- **Text Glow Enabled**: Toggle outer glow effect
 
-```scss
-.groups-welcome-banner {
-  background: linear-gradient(90deg, #your-colors-here);
-}
-```
+**Colors (8-color gradient):**
+- **Gradient Color 1-8**: Customize each color in the rainbow gradient
+  - Default is rainbow: Purple → Magenta → Orange → Yellow → Green → Cyan → Indigo
+  - Set all 8 to the same color for a solid background
+
+**Layout:**
+- **Banner Padding**: Space inside banner (default: 3rem 2rem)
+- **Border Radius**: Corner roundness (default: 12px, use 0 for square)
+
+### Examples
+
+**Solid Color Banner:**
+Set all gradient colors 1-8 to `#3F51B5` for solid blue.
+
+**Two-Tone Gradient:**
+Set colors 1-4 to `#6B4E9D` (purple) and colors 5-8 to `#00BCD4` (cyan).
+
+**Larger Text:**
+Set heading to `3em` and subheading to `1.5em`.
+
+**No Effects:**
+Disable both "Text Shadow" and "Text Glow" for flat text.
 
 ### Disable Redirect (Banner Only)
 

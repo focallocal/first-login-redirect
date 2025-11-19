@@ -1,44 +1,58 @@
 /* Groups Welcome Banner Styling */
 
 .groups-welcome-banner {
-  /* Rainbow gradient inspired by Public Happiness Movement logo */
+  /* Rainbow gradient - customizable via theme settings */
   background: linear-gradient(
     90deg,
-    #6B4E9D 0%,     /* Purple */
-    #E91E63 15%,     /* Magenta/Pink */
-    #FF5722 30%,     /* Red-Orange */
-    #FF9800 45%,     /* Orange */
-    #FDD835 60%,     /* Yellow */
-    #8BC34A 75%,     /* Light Green */
-    #00BCD4 90%,     /* Cyan/Blue */
-    #3F51B5 100%     /* Indigo */
+    $gradient_color_1 0%,
+    $gradient_color_2 15%,
+    $gradient_color_3 30%,
+    $gradient_color_4 45%,
+    $gradient_color_5 60%,
+    $gradient_color_6 75%,
+    $gradient_color_7 90%,
+    $gradient_color_8 100%
   );
   
-  padding: 3rem 2rem;
-  border-radius: 12px;
+  padding: $banner_padding;
+  border-radius: $border_radius;
   margin-bottom: 1.5rem;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   
   .banner-heading {
-    font-size: 2.5em;
+    font-size: $heading_font_size;
     font-weight: bold;
     color: white;
     margin: 0 0 1rem 0;
-    text-shadow: 
-      2px 2px 4px rgba(0, 0, 0, 0.5),
-      0 0 20px rgba(0, 0, 0, 0.3);
     line-height: 1.2;
+    
+    @if $text_shadow_enabled {
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    
+    @if $text_glow_enabled {
+      text-shadow: 
+        2px 2px 4px rgba(0, 0, 0, 0.5),
+        0 0 20px rgba(0, 0, 0, 0.3);
+    }
   }
   
   .banner-subheading {
-    font-size: 1.25em;
+    font-size: $subheading_font_size;
     color: white;
     margin: 0;
-    text-shadow: 
-      1px 1px 3px rgba(0, 0, 0, 0.5),
-      0 0 15px rgba(0, 0, 0, 0.3);
     line-height: 1.4;
+    
+    @if $text_shadow_enabled {
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    }
+    
+    @if $text_glow_enabled {
+      text-shadow: 
+        1px 1px 3px rgba(0, 0, 0, 0.5),
+        0 0 15px rgba(0, 0, 0, 0.3);
+    }
   }
   
   /* Mobile responsive */
@@ -46,11 +60,11 @@
     padding: 2rem 1.5rem;
     
     .banner-heading {
-      font-size: 1.8em;
+      font-size: calc(#{$heading_font_size} * 0.7);
     }
     
     .banner-subheading {
-      font-size: 1.1em;
+      font-size: calc(#{$subheading_font_size} * 0.9);
     }
   }
 }

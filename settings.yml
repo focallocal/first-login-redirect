@@ -1,3 +1,8 @@
+show_banner:
+  default: true
+  type: bool
+  description: "Show the welcome banner on the groups page for new users"
+
 banner_heading:
   default: "Welcome to Public Happiness Movement!"
   type: string
@@ -8,7 +13,73 @@ banner_subheading:
   type: string
   description: "Subheading text for the welcome banner"
 
-show_banner:
+heading_font_size:
+  default: "2.5em"
+  type: string
+  description: "Font size for the main heading (e.g., 2.5em, 32px, 2rem)"
+
+subheading_font_size:
+  default: "1.25em"
+  type: string
+  description: "Font size for the subheading (e.g., 1.25em, 18px, 1.2rem)"
+
+text_shadow_enabled:
   default: true
   type: bool
-  description: "Show the welcome banner on the groups page for new users"
+  description: "Enable text shadow for better readability"
+
+text_glow_enabled:
+  default: true
+  type: bool
+  description: "Enable text glow effect"
+
+gradient_color_1:
+  default: "#6B4E9D"
+  type: string
+  description: "First gradient color (purple)"
+
+gradient_color_2:
+  default: "#E91E63"
+  type: string
+  description: "Second gradient color (magenta/pink)"
+
+gradient_color_3:
+  default: "#FF5722"
+  type: string
+  description: "Third gradient color (red-orange)"
+
+gradient_color_4:
+  default: "#FF9800"
+  type: string
+  description: "Fourth gradient color (orange)"
+
+gradient_color_5:
+  default: "#FDD835"
+  type: string
+  description: "Fifth gradient color (yellow)"
+
+gradient_color_6:
+  default: "#8BC34A"
+  type: string
+  description: "Sixth gradient color (light green)"
+
+gradient_color_7:
+  default: "#00BCD4"
+  type: string
+  description: "Seventh gradient color (cyan/blue)"
+
+gradient_color_8:
+  default: "#3F51B5"
+  type: string
+  description: "Eighth gradient color (indigo)"
+
+banner_padding:
+  default: "3rem 2rem"
+  type: string
+  description: "Banner padding (e.g., 3rem 2rem, 40px 20px)"
+
+border_radius:
+  default: "12px"
+  type: string
+  description: "Banner border radius (e.g., 12px, 1rem, 0 for square)"
+
