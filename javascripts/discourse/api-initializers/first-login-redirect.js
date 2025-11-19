@@ -28,6 +28,8 @@ export default apiInitializer("1.8.0", (api) => {
       // Get user's groups and filter out automatic groups
       const userGroups = user.groups || [];
       
+      console.log("📋 All user groups:", userGroups.map(g => `${g.name} (id:${g.id}, auto:${g.automatic})`));
+      
       // Automatic groups in Discourse have these properties:
       // - automatic: true (this is the key property to check)
       const userCreatedGroups = userGroups.filter(group => !group.automatic);
