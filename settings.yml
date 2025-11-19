@@ -1,0 +1,14 @@
+banner_heading:
+  default: "Welcome to Public Happiness Movement!"
+  type: string
+  description: "Main heading text for the welcome banner"
+
+banner_subheading:
+  default: "Please join a group below to connect with others who share your interests."
+  type: string
+  description: "Subheading text for the welcome banner"
+
+show_banner:
+  default: true
+  type: bool
+  description: "Show the welcome banner on the groups page for new users"

@@ -34,24 +34,25 @@ A Discourse theme component that redirects new users (Trust Level 0) to the grou
 
 ## Customization
 
-### Change Banner Message
+### Theme Settings (Recommended)
 
-Edit `javascripts/discourse/components/groups-welcome-banner.gjs`:
+1. Go to **Admin → Customize → Themes**
+2. Click on your theme that includes this component
+3. Go to **Settings** and find the "First Login Redirect" section
+4. Customize:
+   - **Banner Heading**: The main large text (default: "Welcome to Public Happiness Movement!")
+   - **Banner Subheading**: The smaller explanatory text below the heading
+   - **Show Banner**: Toggle the banner on/off
 
-```javascript
-<strong>Your Custom Title!</strong>
-Your custom message here.
-```
+### Advanced: Change Banner Colors
 
-### Change Banner Colors
+The banner uses a vibrant rainbow gradient inspired by the Public Happiness Movement logo.
 
-Edit `common/common.scss`:
+To customize colors, edit `common/common.scss`:
 
 ```scss
 .groups-welcome-banner {
-  background: linear-gradient(135deg, #your-color-1, #your-color-2);
-  border-left: 4px solid #your-border-color;
-  color: #your-text-color;
+  background: linear-gradient(90deg, #your-colors-here);
 }
 ```
 
