@@ -3,19 +3,35 @@ import { apiInitializer } from "discourse/lib/api";
 export default apiInitializer("1.8.0", (api) => {
   api.onPageChange((url, title) => {
     const currentUser = api.getCurrentUser();
-    if (!currentUser) return;
+    
+    console.log("🔍 First-Login-Redirect: Page changed to:", url);
+    console.log("👤 Current user:", currentUser?.username, "TL:", currentUser?.trust_level);
+    
+    if (!currentUser) {
+      console.log("⚠️ No user logged in, skipping redirect");
+      return;
+    }
 
-    // Check if user just completed signup (trust level 0 and first visit)
-    // Discourse redirects new users to their profile after signup
-    if (
-      currentUser.trust_level === 0 &&
-      (url === `/u/${currentUser.username}` || url === "/u/account-created")
-    ) {
-      // Check if we've already redirected (use sessionStorage to avoid loops)
-      if (!sessionStorage.getItem("first_login_redirected")) {
-        sessionStorage.setItem("first_login_redirected", "true");
-        window.location.href = "/g";
-      }
+    // Only redirect Trust Level 0 users
+    if (currentUser.trust_level !== 0) {
+      console.log("✓ User is TL" + currentUser.trust_level + ", skipping redirect");
+      return;
+    }
+
+    // Check if we've already redirected this session
+    const hasRedirected = sessionStorage.getItem("first_login_redirected");
+    if (hasRedirected) {
+      console.log("✓ Already redirected this session");
+      return;
+    }
+
+    // Redirect on first page after login (any page except /g)
+    if (!url.startsWith("/g")) {
+      console.log("🔄 Redirecting TL0 user to /g");
+      sessionStorage.setItem("first_login_redirected", "true");
+      window.location.href = "/g";
+    } else {
+      console.log("✓ Already on groups page");
     }
   });
 });
