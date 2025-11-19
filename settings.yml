@@ -1,7 +1,7 @@
 show_banner:
   default: true
   type: bool
-  description: "Show the welcome banner on the groups page for new users"
+  description: "Show the welcome banner on the groups page"
 
 banner_heading:
   default: "Welcome to Public Happiness Movement!"
@@ -12,6 +12,41 @@ banner_subheading:
   default: "Please join a group below to connect with others who share your interests."
   type: string
   description: "Subheading text for the welcome banner"
+
+use_gradient:
+  default: true
+  type: bool
+  description: "Use gradient background (if false, uses solid color from Color 1)"
+
+gradient_color_1:
+  default: "#E91E63"
+  type: string
+  description: "First gradient color (magenta/pink) - or solid background color if gradient disabled"
+
+gradient_color_2:
+  default: "#FF5722"
+  type: string
+  description: "Second gradient color (red-orange)"
+
+gradient_color_3:
+  default: "#FF9800"
+  type: string
+  description: "Third gradient color (orange)"
+
+gradient_color_4:
+  default: "#FDD835"
+  type: string
+  description: "Fourth gradient color (yellow)"
+
+gradient_color_5:
+  default: "#8BC34A"
+  type: string
+  description: "Fifth gradient color (light green)"
+
+gradient_color_6:
+  default: "#00BCD4"
+  type: string
+  description: "Sixth gradient color (cyan/blue)"
 
 heading_font_size:
   default: "2.5em"
@@ -32,46 +67,6 @@ text_glow_enabled:
   default: true
   type: bool
   description: "Enable text glow effect"
-
-gradient_color_1:
-  default: "#6B4E9D"
-  type: string
-  description: "First gradient color (purple)"
-
-gradient_color_2:
-  default: "#E91E63"
-  type: string
-  description: "Second gradient color (magenta/pink)"
-
-gradient_color_3:
-  default: "#FF5722"
-  type: string
-  description: "Third gradient color (red-orange)"
-
-gradient_color_4:
-  default: "#FF9800"
-  type: string
-  description: "Fourth gradient color (orange)"
-
-gradient_color_5:
-  default: "#FDD835"
-  type: string
-  description: "Fifth gradient color (yellow)"
-
-gradient_color_6:
-  default: "#8BC34A"
-  type: string
-  description: "Sixth gradient color (light green)"
-
-gradient_color_7:
-  default: "#00BCD4"
-  type: string
-  description: "Seventh gradient color (cyan/blue)"
-
-gradient_color_8:
-  default: "#3F51B5"
-  type: string
-  description: "Eighth gradient color (indigo)"
 
 banner_padding:
   default: "3rem 2rem"

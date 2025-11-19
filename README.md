@@ -55,10 +55,11 @@ All customization can be done from the Discourse admin panel without editing cod
 - **Text Shadow Enabled**: Toggle text shadow for readability
 - **Text Glow Enabled**: Toggle outer glow effect
 
-**Colors (8-color gradient):**
-- **Gradient Color 1-8**: Customize each color in the rainbow gradient
-  - Default is rainbow: Purple → Magenta → Orange → Yellow → Green → Cyan → Indigo
-  - Set all 8 to the same color for a solid background
+**Colors:**
+- **Use Gradient**: Enable/disable gradient (if disabled, uses solid color)
+- **Gradient Color 1-6**: Customize each color in the gradient
+  - Default: Pink → Orange → Yellow → Green → Cyan
+  - Set "Use Gradient" to OFF for solid color using Color 1
 
 **Layout:**
 - **Banner Padding**: Space inside banner (default: 3rem 2rem)
@@ -67,10 +68,10 @@ All customization can be done from the Discourse admin panel without editing cod
 ### Examples
 
 **Solid Color Banner:**
-Set all gradient colors 1-8 to `#3F51B5` for solid blue.
+Turn OFF "Use Gradient" and set Color 1 to your desired color (e.g., `#FF5722` for orange).
 
 **Two-Tone Gradient:**
-Set colors 1-4 to `#6B4E9D` (purple) and colors 5-8 to `#00BCD4` (cyan).
+Turn ON "Use Gradient" and set colors 1-3 to one color, colors 4-6 to another.
 
 **Larger Text:**
 Set heading to `3em` and subheading to `1.5em`.
