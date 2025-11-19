@@ -6,11 +6,16 @@ export default class GroupsWelcomeBanner extends Component {
   @service currentUser;
 
   get shouldShow() {
-    // Show on /g (groups index page) for all logged-in users
-    return (
-      this.currentUser &&
-      this.router.currentRouteName === "groups.index"
-    );
+    if (!this.currentUser || this.router.currentRouteName !== "groups.index") {
+      return false;
+    }
+
+    // Check trust level range
+    const userTrustLevel = this.currentUser.trust_level;
+    const minTL = settings.min_trust_level;
+    const maxTL = settings.max_trust_level;
+    
+    return userTrustLevel >= minTL && userTrustLevel <= maxTL;
   }
 
   <template>

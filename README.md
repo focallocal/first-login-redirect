@@ -46,6 +46,8 @@ All customization can be done from the Discourse admin panel without editing cod
 
 **Content:**
 - **Show Banner**: Toggle the banner on/off
+- **Min Trust Level**: Minimum trust level to see banner (0-4, default: 0)
+- **Max Trust Level**: Maximum trust level to see banner (0-4, default: 4)
 - **Banner Heading**: Main large text
 - **Banner Subheading**: Smaller explanatory text
 
@@ -66,6 +68,12 @@ All customization can be done from the Discourse admin panel without editing cod
 - **Border Radius**: Corner roundness (default: 12px, use 0 for square)
 
 ### Examples
+
+**Show for TL0 only (new users):**
+Set Min Trust Level = 0, Max Trust Level = 0
+
+**Show for everyone except admins:**
+Set Min Trust Level = 0, Max Trust Level = 3
 
 **Solid Color Banner:**
 Turn OFF "Use Gradient" and set Color 1 to your desired color (e.g., `#FF5722` for orange).
