@@ -5,6 +5,14 @@ export default apiInitializer("1.8.0", (api) => {
   
   console.log("🚀 First-login-redirect: Initializing route interceptor");
   
+  // Clear redirect flag when user logs out
+  api.onPageChange(() => {
+    if (!api.getCurrentUser()) {
+      sessionStorage.removeItem("redirected_to_groups");
+      console.log("🔄 Cleared redirect flag (user logged out)");
+    }
+  });
+  
   // Intercept route transitions
   router.on("routeWillChange", (transition) => {
     // Check if redirect is enabled
@@ -28,13 +36,13 @@ export default apiInitializer("1.8.0", (api) => {
       // Get user's groups and filter out automatic groups
       const userGroups = user.groups || [];
       
-      console.log("📋 All user groups:", userGroups.map(g => `${g.name} (id:${g.id}, auto:${g.automatic})`));
+      console.log("📋 All user groups:", userGroups);
       
       // Automatic groups in Discourse have these properties:
       // - automatic: true (this is the key property to check)
       const userCreatedGroups = userGroups.filter(group => !group.automatic);
       
-      console.log(`📊 User has ${userCreatedGroups.length} non-automatic groups:`, userCreatedGroups.map(g => g.name));
+      console.log(`📊 User has ${userCreatedGroups.length} non-automatic groups:`, userCreatedGroups);
       
       const minRequired = settings.min_groups_required || 1;
       const hasEnoughGroups = userCreatedGroups.length >= minRequired;
