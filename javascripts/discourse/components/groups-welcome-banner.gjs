@@ -26,8 +26,8 @@ export default class GroupsWelcomeBanner extends Component {
   <template>
     {{#if this.shouldShow}}
       <div class="groups-welcome-banner">
-        <h2 class="banner-heading">Welcome to Public Happiness Movement!</h2>
-        <p class="banner-subheading">Please join a group below to connect with others who share your interests.</p>
+        <h2 class="banner-heading">{{settings.banner_heading}}</h2>
+        <p class="banner-subheading">{{settings.banner_subheading}}</p>
       </div>
     {{/if}}
   </template>
