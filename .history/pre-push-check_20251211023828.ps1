@@ -130,15 +130,14 @@ if (-not (Test-Path "about.json")) {
 if (Test-Path "settings.yml") {
     $settingsContent = Get-Content "settings.yml" -Raw
     
-    # Check if there's a list setting that looks like it takes category slugs but doesn't use list_type: category
-    # Only warn if setting name contains "categor" AND it's a list type AND doesn't have list_type: category
-    if ($settingsContent -match "categor[^:]*:\s*\n\s+type:\s*list" -and $settingsContent -notmatch "list_type:\s*category") {
-        Write-Warning-Custom "settings.yml has category list setting - consider using 'list_type: category' for dropdown picker"
+    # Check if using manual category entry instead of list_type: category
+    if ($settingsContent -match "categor" -and $settingsContent -notmatch "list_type:\s*category") {
+        Write-Warning-Custom "settings.yml mentions categories but doesn't use 'list_type: category' for dropdown picker"
     }
     
-    # Check if there's a list setting that looks like it takes group slugs but doesn't use list_type: group  
-    if ($settingsContent -match "group[^:]*:\s*\n\s+type:\s*list" -and $settingsContent -notmatch "list_type:\s*group") {
-        Write-Warning-Custom "settings.yml has group list setting - consider using 'list_type: group' for dropdown picker"
+    # Check if using manual group entry instead of list_type: group
+    if ($settingsContent -match "group" -and $settingsContent -notmatch "list_type:\s*group" -and $settingsContent -match "type:\s*list") {
+        Write-Warning-Custom "settings.yml mentions groups but doesn't use 'list_type: group' for dropdown picker"
     }
     
     Write-Success "settings.yml patterns checked"
@@ -208,13 +207,11 @@ if ($hasNodeModules) {
 # 5. BEST PRACTICES REMINDERS
 # ============================================
 Write-Host "`n[INFO] Best Practices Checklist:" -ForegroundColor Cyan
-Write-Host "   [ ] Use CSS variables: --primary, --secondary, --tertiary, --danger, --success" -ForegroundColor Gray
-Write-Host "   [ ] Use rgb() not rgba(): rgb(var(--primary-rgb) / 0.5)" -ForegroundColor Gray
+Write-Host "   [ ] Use CSS variables for colors: --primary, --secondary, --tertiary, --danger, --success" -ForegroundColor Gray
+Write-Host "   [ ] Use --primary-rgb, --secondary-rgb for alpha: rgb(var(--primary-rgb) / 0.5)" -ForegroundColor Gray
 Write-Host "   [ ] Use .gjs files for new components (Glimmer/Ember Octane)" -ForegroundColor Gray
-Write-Host "   [ ] Use api.renderInOutlet() - avoid template overrides" -ForegroundColor Gray
-Write-Host "   [ ] Use list_type: category/group in settings.yml for dropdowns" -ForegroundColor Gray
+Write-Host "   [ ] Use api.renderInOutlet() for plugin outlets" -ForegroundColor Gray
 Write-Host "   [ ] Use BEM naming: .block__element.--modifier" -ForegroundColor Gray
-Write-Host "   [ ] Use additive CSS (override, don't replace)" -ForegroundColor Gray
 Write-Host "   [ ] Test on mobile and desktop" -ForegroundColor Gray
 Write-Host "   [ ] Test with dark mode enabled" -ForegroundColor Gray
 Write-Host "   [ ] Squash commits before PR: git reset --soft upstream/main; git commit" -ForegroundColor Gray

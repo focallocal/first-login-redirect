@@ -130,15 +130,14 @@ if (-not (Test-Path "about.json")) {
 if (Test-Path "settings.yml") {
     $settingsContent = Get-Content "settings.yml" -Raw
     
-    # Check if there's a list setting that looks like it takes category slugs but doesn't use list_type: category
-    # Only warn if setting name contains "categor" AND it's a list type AND doesn't have list_type: category
-    if ($settingsContent -match "categor[^:]*:\s*\n\s+type:\s*list" -and $settingsContent -notmatch "list_type:\s*category") {
-        Write-Warning-Custom "settings.yml has category list setting - consider using 'list_type: category' for dropdown picker"
+    # Check if using manual category entry instead of list_type: category
+    if ($settingsContent -match "categor" -and $settingsContent -notmatch "list_type:\s*category") {
+        Write-Warning-Custom "settings.yml mentions categories but doesn't use 'list_type: category' for dropdown picker"
     }
     
-    # Check if there's a list setting that looks like it takes group slugs but doesn't use list_type: group  
-    if ($settingsContent -match "group[^:]*:\s*\n\s+type:\s*list" -and $settingsContent -notmatch "list_type:\s*group") {
-        Write-Warning-Custom "settings.yml has group list setting - consider using 'list_type: group' for dropdown picker"
+    # Check if using manual group entry instead of list_type: group
+    if ($settingsContent -match "group" -and $settingsContent -notmatch "list_type:\s*group" -and $settingsContent -match "type:\s*list") {
+        Write-Warning-Custom "settings.yml mentions groups but doesn't use 'list_type: group' for dropdown picker"
     }
     
     Write-Success "settings.yml patterns checked"
