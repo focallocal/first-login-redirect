@@ -27,7 +27,7 @@ export default class GroupsWelcomeBanner extends Component {
     {{#if this.shouldShow}}
       <div class="groups-welcome-banner">
         <h2 class="banner-heading">{{settings.banner_heading}}</h2>
-        <p class="banner-subheading">{{settings.banner_subheading}}</p>
+        <p class="banner-subheading">{{{settings.banner_subheading}}}</p>
       </div>
     {{/if}}
   </template>

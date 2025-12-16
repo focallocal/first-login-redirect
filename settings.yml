@@ -40,9 +40,9 @@ banner_heading:
   description: "Main heading text for the welcome banner"
 
 banner_subheading:
-  default: "Please join a group below to connect with others who share your interests."
+  default: "Join a few groups so you hear about new kindness activities near you. Start with places you'd happily travel to for kindness gatherings, then add any groups that match your skills, causes or passions. You can always come back and join more later.<p>If the group you're looking for doesn't exist yet, you're first! Please create it and invite the kindest, coolest people you know nearby to join our movement for a kinder, more connected world."
   type: string
-  description: "Subheading text for the welcome banner"
+  description: "Subheading text for the welcome banner (HTML allowed)"
 
 use_gradient:
   default: true
