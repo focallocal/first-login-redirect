@@ -30,13 +30,13 @@
     line-height: 1.2;
     
     @if $text_shadow_enabled {
-      text-shadow: 2px 2px 4px rgb(0 0 0 / 0.5);
+      text-shadow: 2px 2px 4px rgb(0 0 0 / 0.75);
     }
     
     @if $text_glow_enabled {
       text-shadow: 
-        2px 2px 4px rgb(0 0 0 / 0.5),
-        0 0 20px rgb(0 0 0 / 0.3);
+        2px 2px 4px rgb(0 0 0 / 0.75),
+        0 0 20px rgb(0 0 0 / 0.4);
     }
   }
   
@@ -47,13 +47,13 @@
     line-height: 1.4;
     
     @if $text_shadow_enabled {
-      text-shadow: 1px 1px 3px rgb(0 0 0 / 0.5);
+      text-shadow: 1px 1px 3px rgb(0 0 0 / 0.75);
     }
     
     @if $text_glow_enabled {
       text-shadow: 
-        1px 1px 3px rgb(0 0 0 / 0.5),
-        0 0 15px rgb(0 0 0 / 0.3);
+        1px 1px 3px rgb(0 0 0 / 0.75),
+        0 0 15px rgb(0 0 0 / 0.4);
     }
   }
   
