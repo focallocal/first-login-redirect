@@ -99,6 +99,50 @@ text_glow_enabled:
   type: bool
   description: "Enable text glow effect"
 
+inner_glow_size:
+  default: "3px"
+  type: string
+  description: "Inner glow size (e.g., 3px, 5px, 0px for none)"
+
+inner_glow_opacity:
+  default: 0.4
+  type: float
+  min: 0
+  max: 1
+  description: "Inner glow opacity (0 = transparent, 1 = opaque)"
+
+shadow_offset_x:
+  default: "3.5px"
+  type: string
+  description: "Shadow horizontal offset for heading (e.g., 2px, 3.5px)"
+
+shadow_offset_y:
+  default: "3.5px"
+  type: string
+  description: "Shadow vertical offset for heading (e.g., 2px, 3.5px)"
+
+shadow_blur:
+  default: "7px"
+  type: string
+  description: "Shadow blur radius for heading (e.g., 4px, 7px)"
+
+shadow_opacity:
+  default: 0.75
+  type: float
+  min: 0
+  max: 1
+  description: "Shadow opacity (0 = transparent, 1 = opaque)"
+
+subheading_shadow_offset:
+  default: "2px"
+  type: string
+  description: "Shadow offset for subheading (e.g., 1px, 2px)"
+
+subheading_shadow_blur:
+  default: "5px"
+  type: string
+  description: "Shadow blur radius for subheading (e.g., 3px, 5px)"
+
 banner_padding:
   default: "3rem 2rem"
   type: string

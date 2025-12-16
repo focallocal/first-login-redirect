@@ -31,14 +31,14 @@
     
     @if $text_shadow_enabled {
       text-shadow: 
-        0 0 3px rgb(255 255 255 / 0.4),
-        3.5px 3.5px 7px rgb(0 0 0 / 0.75);
+        0 0 $inner_glow_size rgb(255 255 255 / $inner_glow_opacity),
+        $shadow_offset_x $shadow_offset_y $shadow_blur rgb(0 0 0 / $shadow_opacity);
     }
     
     @if $text_glow_enabled {
       text-shadow: 
-        0 0 3px rgb(255 255 255 / 0.4),
-        3.5px 3.5px 7px rgb(0 0 0 / 0.75),
+        0 0 $inner_glow_size rgb(255 255 255 / $inner_glow_opacity),
+        $shadow_offset_x $shadow_offset_y $shadow_blur rgb(0 0 0 / $shadow_opacity),
         0 0 20px rgb(0 0 0 / 0.4);
     }
   }
@@ -51,14 +51,14 @@
     
     @if $text_shadow_enabled {
       text-shadow: 
-        0 0 3px rgb(255 255 255 / 0.4),
-        2px 2px 5px rgb(0 0 0 / 0.75);
+        0 0 $inner_glow_size rgb(255 255 255 / $inner_glow_opacity),
+        $subheading_shadow_offset $subheading_shadow_offset $subheading_shadow_blur rgb(0 0 0 / $shadow_opacity);
     }
     
     @if $text_glow_enabled {
       text-shadow: 
-        0 0 3px rgb(255 255 255 / 0.4),
-        2px 2px 5px rgb(0 0 0 / 0.75),
+        0 0 $inner_glow_size rgb(255 255 255 / $inner_glow_opacity),
+        $subheading_shadow_offset $subheading_shadow_offset $subheading_shadow_blur rgb(0 0 0 / $shadow_opacity),
         0 0 15px rgb(0 0 0 / 0.4);
     }
   }
